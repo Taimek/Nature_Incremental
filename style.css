@@ -1,0 +1,29 @@
+#carrotsamount{
+    text-align: center;
+}
+.field{
+    border: 1px solid black;
+    width: 200px;
+    height: 200px;
+    
+}
+
+
+img{
+    width: 200px;
+    height: 200px;
+
+}
+#sellshop{
+    height: 700px;
+    width: 400px;
+    border: 1px solid black;
+    float: right;
+    
+}
+.hide{
+    display: none;
+}
+.show{
+    
+}
