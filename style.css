@@ -1,6 +1,9 @@
 #carrotsamount{
     text-align: center;
 }
+#moneyamount{
+    text-align: center;
+}
 .field{
     border: 1px solid black;
     width: 200px;
@@ -21,9 +24,43 @@ img{
     float: right;
     
 }
+#upgradeshop{
+    height: 700px;
+    width: 400px;
+    border: 1px solid black;
+    float: right;
+    margin: 1px;
+}
 .hide{
     display: none;
 }
 .show{
     
+}
+
+#opensellingshop{
+    width: 150px;
+}
+#closesellingshop{
+    width: 150px;
+}
+#sellcarrots{
+
+    height: 50px;
+    width: 100%;
+}
+#psellcarrots{
+    text-align: center;
+}
+#openupgradeshop{
+    width: 150px;
+}
+#closeupgradeshop{
+    width: 150px;
+}
+
+.upgradeslayer1{
+    border: 1px solid black;
+    height: 50px;
+    width: 100%;
 }
