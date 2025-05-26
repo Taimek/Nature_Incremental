@@ -64,3 +64,7 @@ img{
     height: 50px;
     width: 100%;
 }
+#carrotfieldplace{
+    display: flex;
+    flex-wrap: wrap;
+}

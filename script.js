@@ -9,44 +9,54 @@ const opensellingshop = document.getElementById("opensellingshop");
 const closeupgradeshop = document.getElementById("closeupgradeshop");
 const openupgradeshop = document.getElementById("openupgradeshop");
 const moneyamount = document.getElementById("moneyamount");
+const carrotfieldarea = document.getElementById("carrotfieldplace");
+const allCarrotFields = document.querySelectorAll('.field');
 marchewka.src = "marchewka.png";
 let priceupgrade1 = 10;
 let priceupgrade2 = 100;
+let priceupgrade3 = 1;
 let marchewki = 0;
-let marchewkifieldamt = 0;
+const marchewkifieldamt = []; 
 let marchewkimulti = 1;
-let money = 0;
+let money = 15 ;
 let marchewkibase = 1;
-marchewka.addEventListener("mouseover", collectmarchewka);
+let fieldnumber = 0;
 
-function collectmarchewka() {
-    if(field.contains(marchewka)) {
-        field.removeChild(marchewka);
-        marchewki += marchewkifieldamt;
+
+function collectmarchewka(event) {
+    const index = parseInt(event.currentTarget.dataset.index, 10);
+    if (marchewkifieldamt[index] > 0) {
+        marchewki += marchewkifieldamt[index];
+        marchewkifieldamt[index] = 0;
+        console.log(`Zebrano marchewki z pola ${index}`);
     }
-    marchewkifieldamt = 0;
 }
 
 function producecarrots() {
     setInterval(() => {
-        setTimeout(() => {
-            field.appendChild(marchewka);
-            marchewkifieldamt += marchewkibase*marchewkimulti;
-          }, 1000);
-    {
-}}, 1000);
+        for (let i = 0; i < marchewkifieldamt.length; i++) {
+            if (typeof marchewkifieldamt[i] !== 'number') {
+                marchewkifieldamt[i] = 0;
+            }
+            marchewkifieldamt[i] += marchewkibase * marchewkimulti;
+            ;
+        }
+        
+    }, 1000);
 }
 
 function updateui() {
     setInterval(() => {
     carrotsamount.textContent = "You Have: " + marchewki +" Carrots";
-    marchewkiamount.textContent = "There are : "+marchewkifieldamt+" Carrots in this field";
     moneyamount.textContent = "You Have: " + money + " Money";
     functional_shopsell();
     functional_upgradeshop();
+    document.querySelectorAll(".carrotamountinfield").forEach((elem, index) => {
+  elem.textContent = `Carrots in field: ${marchewkifieldamt[index]}`;
+});
     document.getElementById("upgrade1").textContent = "Upgrade 1: " + priceupgrade1 + " Money";
     document.getElementById("upgrade2").textContent = "Upgrade 2: " + priceupgrade2 + " Money";
-    
+     document.getElementById("upgrade3").textContent = "Buy new Plots!: " + priceupgrade3 + " Money";
 }, 10)}  ;
 
 function loadsellshop() {
@@ -85,7 +95,7 @@ function loadupgradeshop() {
         upgradeshop.classList.add("show");
         const upgrade1 = document.getElementById("upgrade1");
         const upgrade2 = document.getElementById("upgrade2");
-        
+        const upgrade3 = document.getElementById("upgrade3");
         upgrade1.addEventListener("click", () => {
             if (money >= priceupgrade1){
                 money -= priceupgrade1;
@@ -102,12 +112,33 @@ function loadupgradeshop() {
             
         }
   });
+    upgrade3.addEventListener("click", () => {
+          if (money >= priceupgrade3){
+              money -= priceupgrade3;
+              marchewkifieldamt.push(0);
+              const carrotfield = document.createElement("div");
+              const carrotfieldcarrotsamt = document.createElement("p");
+              carrotfield.id = `fieldcarrot${fieldnumber}`;
+              carrotfield.className = `field`;
+              carrotfield.dataset.index = fieldnumber;
+              carrotfieldarea.appendChild(carrotfield);
+               carrotfield.addEventListener("mouseover", collectmarchewka);
+              priceupgrade3 *= 1000;
+              carrotfieldcarrotsamt.id =`marchewkifieldamount${fieldnumber}`;
+              carrotfieldcarrotsamt.className = `carrotamountinfield`;
+              
+              carrotfield.appendChild(carrotfieldcarrotsamt);
+              fieldnumber++;
+          }
+    });
+    
     })
       .catch(error => {
         upgradeshop.textContent = "Błąd: " + error.message;
       });
 
   }
+
 function closesellshop() {
     if(sellshop.classList.contains("show")) {
         sellshop.classList.remove("show");
