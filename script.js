@@ -54,9 +54,14 @@ function updateui() {
     document.querySelectorAll(".carrotamountinfield").forEach((elem, index) => {
   elem.textContent = `Carrots in field: ${marchewkifieldamt[index]}`;
 });
-    document.getElementById("upgrade1").textContent = "Upgrade 1: " + priceupgrade1 + " Money";
-    document.getElementById("upgrade2").textContent = "Upgrade 2: " + priceupgrade2 + " Money";
-     document.getElementById("upgrade3").textContent = "Buy new Plots!: " + priceupgrade3 + " Money";
+    if (upgradeshop.classList.contains("show")!=true){
+
+    }
+    else{
+        document.getElementById("upgrade1").textContent = "Upgrade 1: " + priceupgrade1 + " Money";
+        document.getElementById("upgrade2").textContent = "Upgrade 2: " + priceupgrade2 + " Money";
+         document.getElementById("upgrade3").textContent = "Buy new Plots!: " + priceupgrade3 + " Money";
+    }
 }, 10)}  ;
 
 function loadsellshop() {
